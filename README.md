@@ -56,6 +56,8 @@ Dataset yang digunakan dalam proyek ini merupakan dataset tentang Movie. Dataset
 
 ### Univariate Exploratory Data Analysis
 
+*Variabel-Variabel di dataset*
+
 | Dataset   | Variabel | Fungsi Utama |
 |-------------|-----------|------------|
 | links     | movieId, imdbId   | Hubungkan movieId ke data eksternal (IMDb) |
@@ -77,6 +79,7 @@ Melihat 5 data teratas dari dataset rating.csv
 
 - Dataset terdiri dari 100.836 baris dan 4 kolom.
 - Semua kolom tidak ada yang kosong (non-null).
+- Kolom userId, movieId, dan timestamp bertipe integer, sedangkan rating adalah float.
 - Kolom:
 1. **userId:** ID unik pengguna.
 
@@ -85,6 +88,72 @@ Melihat 5 data teratas dari dataset rating.csv
 3. **rating:** Nilai rating yang diberikan (0.5 – 5.0).
 
 4. **timestamp:** Waktu saat rating diberikan (dalam format UNIX time).
+
+*Menghitung Jumlah Pengguna Unik dari Dataset Ratings*
+
+![image](https://github.com/user-attachments/assets/5d610b54-1909-406f-9fc7-4d012fddf37b)
+
+Total ada 610 pengguna berbeda yang memberikan rating terhadap film.
+
+*Jumlah Pengguna yang Memberikan Rating Film*
+
+![image](https://github.com/user-attachments/assets/5ff56adb-1add-480d-9f58-5f5fe9b2b121)
+
+Ada 9.724 film berbeda yang menerima setidaknya satu rating.Ini menunjukkan sebaran data rating sudah cukup luas ke berbagai film.
+
+*Mengecek Statistik deskriptif rating*
+
+![image](https://github.com/user-attachments/assets/b2be7936-3d3e-4f88-9210-05b7afbe8449)
+
+- Mayoritas rating ada di rentang 3.0–4.0.
+
+- Rating cenderung positif (rata-rata 3.5).
+
+- Tidak ada rating di bawah 0.5 atau di atas 5.0 → data valid.
+
+*Visualisasi Distribusi Rating pada Dataset*
+
+![image](https://github.com/user-attachments/assets/751df2f7-f7bc-4949-b535-60773874f715)
+
+- Rating 4.0 paling banyak diberikan.
+
+- Disusul 3.0, lalu 5.0 → pengguna lebih sering memberi nilai tinggi.
+
+- Rating 0.5 dan 1.0 relatif jarang → menunjukkan bias pengguna terhadap hal-hal yang disukai.
+
+*Top 10 Film dengan Rata-Rata Rating Tertinggi*
+
+![image](https://github.com/user-attachments/assets/52e0304e-f327-4cea-870a-1b8e0d09eb75)
+
+- 10 film ini punya rata-rata rating 5.0 → artinya setiap rating yang masuk nilainya maksimal.
+
+- Kemungkinan film ini hanya punya 1 atau sedikit rating, jadi rata-ratanya belum mewakili banyak opini.
+
+- Perlu dicek jumlah ratingnya untuk memastikan mereka benar-benar populer atau hanya disukai oleh 1–2 pengguna saja.
+
+*10 Film dengan Jumlah Rating Terbanyak*
+
+![image](https://github.com/user-attachments/assets/0d209c45-005c-4efa-93b6-dc141e6527c7)
+
+- Ini adalah film-film paling sering dirating oleh user, jadi bisa disebut film paling populer di dataset.
+
+- Misalnya, film dengan movieId = 356 memiliki 329 rating, berarti banyak user yang menonton dan menilainya.
+
+*Film Terbaik Berdasarkan Rata-Rata Rating (Minimal 100 Rating)*
+
+![image](https://github.com/user-attachments/assets/78a52df1-a117-42ac-8f32-53a5c0fc6eba)
+
+- Ini adalah film dengan kualitas terbaik berdasarkan rating rata-rata, dengan syarat jumlah rating-nya ≥ 100.
+
+- Jadi, film seperti movieId = 318 tidak hanya populer (317 rating), tapi juga sangat disukai (rating rata-rata 4.42).
+
+
+
+
+
+
+
+
 
 
 
