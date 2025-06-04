@@ -244,6 +244,26 @@ Contoh:
 
 ### Content-Based Filtering dengan pendekatan User Profile Genre
 
+Cara Kerja:
+
+“Jika user menyukai film bergenre Action dan Sci-Fi, maka film lain dengan genre serupa akan lebih disukai.”
+
+✅ Kelebihan:
+- Tidak tergantung user lain: Hanya butuh data user itu sendiri → cocok untuk sistem individual.
+
+- Bekerja baik untuk cold-start user: Karena memanfaatkan metadata (genre), model masih bisa memberikan rekomendasi walau user belum banyak memberi rating.
+
+- Rekomendasi dapat dijelaskan: Misalnya: “Film ini direkomendasikan karena memiliki genre Action dan Sci-Fi yang Anda sukai.”
+
+- Lebih stabil terhadap perubahan data: Tidak terlalu terpengaruh oleh fluktuasi data rating user lain.
+
+❌ Kekurangan:
+- Rekomendasi cenderung sempit: User hanya mendapat rekomendasi yang mirip dengan yang sudah ditonton → kurang bisa eksplorasi genre/film baru.
+
+- Kualitas tergantung metadata: Jika informasi genre tidak lengkap atau tidak relevan, kualitas rekomendasi bisa buruk.
+
+- Tidak menangkap selera kompleks: Tidak mempertimbangkan bagaimana user lain menilai film serupa.
+
 ![image](https://github.com/user-attachments/assets/bd2203a6-41a5-4792-b97e-273ef3609846)
 
 - Output user_profiles adalah representasi minat setiap pengguna terhadap genre film dalam bentuk vektor.
@@ -259,6 +279,30 @@ Contoh:
 - Rekomendasi diberikan berdasarkan kemiripan antara film dan preferensi user, bukan karena film itu populer atau disukai user lain (bukan collaborative).
 
 ### Collaborative Filtering (Matrix Factorization – SVD)
+
+Cara Kerja:
+
+“Jika user A dan user B memiliki rating mirip untuk banyak film, maka film yang disukai B dan belum ditonton A bisa direkomendasikan ke A.”
+
+✅ Kelebihan:
+- Personalized: Rekomendasi lebih akurat karena memperhitungkan pola interaksi antar pengguna dan item.
+
+- Tidak membutuhkan metadata film: Cukup menggunakan data userId, movieId, dan rating saja.
+
+- Menemukan hubungan tersembunyi: Dapat mengenali preferensi user meskipun genre atau konten film tidak diketahui secara eksplisit.
+
+- Skalabilitas tinggi dengan matrix factorization (SVD): Efisien dalam menangani data besar dengan teknik pemfaktoran.
+
+❌ Kekurangan:
+- Cold Start Problem:
+
+- User baru: Tidak ada cukup data riwayat untuk merekomendasikan film.
+
+- Item baru: Film yang belum pernah diberi rating tidak bisa direkomendasikan.
+
+- Sparsity (Kerapatan rendah): Matrix user-item bisa sangat besar tapi banyak yang kosong → mempengaruhi akurasi model.
+
+- Tidak menjelaskan alasan rekomendasi: Sulit dimengerti mengapa film tersebut direkomendasikan.
 
 ![image](https://github.com/user-attachments/assets/d3a262b7-e3ae-4149-8972-84e34c450eec)
 
@@ -284,6 +328,8 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 
 ##  Evaluation
 
+### Content-Based Filtering dengan pendekatan User Profile Genre
+
 ![image](https://github.com/user-attachments/assets/ba7746cd-b339-4734-a377-1435a25eda21)
 
 ✅ Model rekomendasi menyesuaikan genre film rekomendasi dengan genre yang sering ditonton user 1.
@@ -292,13 +338,15 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 
 ✅ Adventure muncul dominan (1.0), artinya model sangat yakin film ini cocok dengan preferensi user.
 
+### Collaborative Filtering (Matrix Factorization – SVD)
+
 ![image](https://github.com/user-attachments/assets/c532f023-d847-4dbc-a73f-6104e59aa5be)
 
 ✅ Model SVD sudah berjalan baik (dengan RMSE ~0.87).
 
 ✅ Prediksi rating untuk film movieId=50 sangat tinggi (5.0), jadi ini kandidat rekomendasi yang kuat untuk user 1.
 
-### Top-N rekomendasi
+### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
 
 ![image](https://github.com/user-attachments/assets/02a2c410-ea69-4947-85a2-336ada2a37a8)
 
@@ -308,9 +356,16 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 
 ✅ Artinya, model sangat yakin bahwa User ID 1 akan sangat menyukai film-film ini.
 
+### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
+
+![image](https://github.com/user-attachments/assets/3b3324dd-1209-405a-a4ed-617cf1ca17bf)
 
 
+✅ Output ini memberitahu kamu 10 film teratas yang paling mirip genre-nya dengan film favorit user.
 
+✅ Film dengan skor tertinggi kemungkinan besar memiliki genre yang sama atau sangat mirip dengan film referensi.
+
+✅ Ini berguna untuk merekomendasikan film serupa berdasarkan preferensi genre, tanpa melihat interaksi pengguna lain.
 
 
 
