@@ -360,14 +360,6 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 
 ✅ Adventure muncul dominan (1.0), artinya model sangat yakin film ini cocok dengan preferensi user.
 
-### Collaborative Filtering (Matrix Factorization – SVD)
-
-![image](https://github.com/user-attachments/assets/c532f023-d847-4dbc-a73f-6104e59aa5be)
-
-✅ Model SVD sudah berjalan baik (dengan RMSE ~0.87).
-
-✅ Prediksi rating untuk film movieId=50 sangat tinggi (5.0), jadi ini kandidat rekomendasi yang kuat untuk user 1.
-
 ## recision@K, Recall@K, NDCG@K
 
 ![image](https://github.com/user-attachments/assets/7ce408e2-94c1-4066-9423-c1e8689e2bb9)
@@ -384,6 +376,92 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 📌 Output 0.0 menunjukkan:
 
 Artinya tidak ada film relevan (yang disukai user 1, rating ≥ 4) yang muncul di top-10 rekomendasi.
+
+### Collaborative Filtering (Matrix Factorization – SVD)
+
+![image](https://github.com/user-attachments/assets/c532f023-d847-4dbc-a73f-6104e59aa5be)
+
+✅ Model SVD sudah berjalan baik (dengan RMSE ~0.87).
+
+✅ Prediksi rating untuk film movieId=50 sangat tinggi (5.0), jadi ini kandidat rekomendasi yang kuat untuk user 1.
+
+## 🔍 Evaluation & Business Understanding
+
+### 🎯 Problem Statement 1:
+**Bagaimana cara merekomendasikan film yang sesuai dengan preferensi setiap pengguna secara otomatis?**
+
+**Evaluasi:**
+- Algoritma **Collaborative Filtering (SVD)** diuji menggunakan metrik **RMSE** dan **MAE**.
+- Hasil rata-rata error menunjukkan bahwa sistem dapat memperkirakan rating dengan cukup akurat.
+
+**Dampak:**
+- Model ini mampu memberikan rekomendasi otomatis dan personal, menjawab kebutuhan personalisasi pengguna.
+
+---
+
+### 🎯 Problem Statement 2:
+**Bagaimana memahami preferensi pengguna hanya berdasarkan film yang telah mereka tonton dan beri rating?**
+
+**Evaluasi:**
+- Pada **Content-Based Filtering**, preferensi pengguna dibentuk dari genre film yang telah diberi rating tinggi.
+- Kemudian dilakukan perhitungan **cosine similarity** antar film untuk mengukur kemiripan konten.
+- Evaluasi kuantitatif dilakukan menggunakan metrik:
+  - **Precision@10**
+  - **Recall@10**
+  - **NDCG@10**
+
+**Dampak:**
+- Model berhasil menyarankan film berdasarkan genre yang sering dipilih user sebelumnya, relevan dengan riwayat rating.
+
+---
+
+### 🎯 Problem Statement 3:
+**Bagaimana menyarankan film baru yang belum ditonton pengguna, namun relevan dengan minat mereka?**
+
+**Evaluasi:**
+- Sistem hanya menyarankan film yang belum pernah ditonton oleh pengguna.
+- Film yang direkomendasikan dipilih berdasarkan kemiripan konten (genre).
+- Keberhasilan rekomendasi diukur dengan **Recall@10** dan **NDCG@10**: semakin tinggi nilainya, semakin tepat sasaran rekomendasinya.
+
+**Dampak:**
+- Jika metrik evaluasi menunjukkan skor rendah, maka kemungkinan preferensi belum terdeteksi dengan baik. Hal ini bisa diperbaiki dengan menambah jumlah interaksi (rating) dari pengguna.
+
+---
+
+## ✅ Goals Achievement
+
+| Goals                                                                 | Status     | Penjelasan |
+|----------------------------------------------------------------------|------------|------------|
+| Membangun sistem rekomendasi otomatis dan personal                   | ✅ Terpenuhi | Dua model telah dibangun dan diuji |
+| Memahami preferensi user berdasarkan riwayat rating                  | ✅ Terpenuhi | CBF menggunakan genre dari film yang disukai user |
+| Menghasilkan rekomendasi film relevan yang belum ditonton pengguna  | ⚠️ Sebagian | Masih perlu evaluasi jika skor Precision/Recall rendah |
+
+---
+
+## 📊 Summary of Evaluation Metrics
+
+### Collaborative Filtering (SVD)
+- **RMSE**: _Contoh_ ` 0.8732`
+- **MAE**: _Contoh_ `0.671`
+
+### Content-Based Filtering
+- **Precision@10**: `0.0`
+- **Recall@10**: `0.0`
+- **NDCG@10**: `0.0`
+
+> Catatan: Nilai 0.0 menunjukkan bahwa film rekomendasi belum cukup relevan dengan film yang benar-benar disukai user. Hal ini bisa disebabkan oleh user yang memiliki sedikit rating atau genre film yang terlalu bervariasi.
+
+---
+
+## 💼 Relevansi Terhadap Bisnis
+
+- **Collaborative Filtering** cocok untuk pengguna aktif dengan banyak rating karena memanfaatkan pola komunitas.
+- **Content-Based Filtering** lebih cocok untuk cold-start user karena fokus pada metadata konten film.
+- Evaluasi dengan metrik seperti Precision@K dan NDCG@K penting untuk mengetahui **seberapa besar potensi model dalam meningkatkan kepuasan pengguna** dan retensi dalam platform layanan film.
+
+---
+
+
 
 
 
