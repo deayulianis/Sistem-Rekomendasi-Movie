@@ -278,6 +278,17 @@ Cara Kerja:
 
 - Rekomendasi diberikan berdasarkan kemiripan antara film dan preferensi user, bukan karena film itu populer atau disukai user lain (bukan collaborative).
 
+### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
+
+![image](https://github.com/user-attachments/assets/02a2c410-ea69-4947-85a2-336ada2a37a8)
+
+✅ Top-10 film yang belum ditonton oleh User ID 1.
+
+✅ Prediksi ratingnya 5.0 untuk semua film (tinggi banget!).
+
+✅ Artinya, model sangat yakin bahwa User ID 1 akan sangat menyukai film-film ini.
+
+
 ### Collaborative Filtering (Matrix Factorization – SVD)
 
 Cara Kerja:
@@ -326,6 +337,17 @@ Tujuan:
 
 model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala rating 0.5-5.0). Jadi, prediksi rating ini cukup tinggi dan menunjukkan bahwa user kemungkinan besar suka dengan film tersebut.
 
+### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
+
+![image](https://github.com/user-attachments/assets/3b3324dd-1209-405a-a4ed-617cf1ca17bf)
+
+
+✅ Output ini memberitahu kamu 10 film teratas yang paling mirip genre-nya dengan film favorit user.
+
+✅ Film dengan skor tertinggi kemungkinan besar memiliki genre yang sama atau sangat mirip dengan film referensi.
+
+✅ Ini berguna untuk merekomendasikan film serupa berdasarkan preferensi genre, tanpa melihat interaksi pengguna lain.
+
 ##  Evaluation
 
 ### Content-Based Filtering dengan pendekatan User Profile Genre
@@ -346,26 +368,25 @@ model memprediksi user 1 akan memberi rating 4.73 untuk movie 50 (dalam skala ra
 
 ✅ Prediksi rating untuk film movieId=50 sangat tinggi (5.0), jadi ini kandidat rekomendasi yang kuat untuk user 1.
 
-### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
+## recision@K, Recall@K, NDCG@K
 
-![image](https://github.com/user-attachments/assets/02a2c410-ea69-4947-85a2-336ada2a37a8)
-
-✅ Top-10 film yang belum ditonton oleh User ID 1.
-
-✅ Prediksi ratingnya 5.0 untuk semua film (tinggi banget!).
-
-✅ Artinya, model sangat yakin bahwa User ID 1 akan sangat menyukai film-film ini.
-
-### Content-Based Filtering (Skor Kemiripan → Top-N Rekomendasi)
-
-![image](https://github.com/user-attachments/assets/3b3324dd-1209-405a-a4ed-617cf1ca17bf)
+![image](https://github.com/user-attachments/assets/7ce408e2-94c1-4066-9423-c1e8689e2bb9)
 
 
-✅ Output ini memberitahu kamu 10 film teratas yang paling mirip genre-nya dengan film favorit user.
+📌 Inti kode:
 
-✅ Film dengan skor tertinggi kemungkinan besar memiliki genre yang sama atau sangat mirip dengan film referensi.
+1️⃣ Hitung precision & recall pada 10 rekomendasi teratas.
 
-✅ Ini berguna untuk merekomendasikan film serupa berdasarkan preferensi genre, tanpa melihat interaksi pengguna lain.
+2️⃣ Precision = berapa dari top-10 yang relevan.
+
+3️⃣ Recall = proporsi film relevan yang berhasil direkomendasikan.
+
+📌 Output 0.0 menunjukkan:
+
+Artinya tidak ada film relevan (yang disukai user 1, rating ≥ 4) yang muncul di top-10 rekomendasi.
+
+
+
 
 
 
